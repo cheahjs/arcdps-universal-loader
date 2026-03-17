@@ -1,0 +1,62 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        proxy_mode: [addon, d3d11, dxgi, version]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install MinGW-w64
+        run: sudo apt-get update && sudo apt-get install -y mingw-w64 ninja-build
+
+      - name: Configure
+        run: cmake --preset mingw64-${{ matrix.proxy_mode }}
+
+      - name: Build
+        run: cmake --build build/${{ matrix.proxy_mode }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.proxy_mode }}
+          path: build/${{ matrix.proxy_mode }}/*.dll
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v6
+        with:
+          path: dist/
+
+      - name: Create release archive
+        run: |
+          mkdir -p release
+          cp dist/addon/*.dll release/arcdps_universal_loader.dll
+          cp dist/d3d11/*.dll release/d3d11.dll
+          cp dist/dxgi/*.dll release/dxgi.dll
+          cp dist/version/*.dll release/version.dll
+          cd release && zip -r ../arcdps-universal-loader.zip .
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: arcdps-universal-loader.zip
+          generate_release_notes: true
