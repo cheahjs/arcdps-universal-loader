@@ -1,0 +1,67 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "mingw64-addon",
+            "displayName": "MinGW64 - Addon (managed mode)",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/addon",
+            "toolchainFile": "${sourceDir}/cmake/toolchain-mingw64.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "PROXY_MODE": "addon"
+            }
+        },
+        {
+            "name": "mingw64-d3d11",
+            "displayName": "MinGW64 - D3D11 Proxy",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/d3d11",
+            "toolchainFile": "${sourceDir}/cmake/toolchain-mingw64.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "PROXY_MODE": "d3d11"
+            }
+        },
+        {
+            "name": "mingw64-dxgi",
+            "displayName": "MinGW64 - DXGI Proxy",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/dxgi",
+            "toolchainFile": "${sourceDir}/cmake/toolchain-mingw64.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "PROXY_MODE": "dxgi"
+            }
+        },
+        {
+            "name": "mingw64-version",
+            "displayName": "MinGW64 - Version Proxy",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/version",
+            "toolchainFile": "${sourceDir}/cmake/toolchain-mingw64.cmake",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "PROXY_MODE": "version"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "mingw64-addon",
+            "configurePreset": "mingw64-addon"
+        },
+        {
+            "name": "mingw64-d3d11",
+            "configurePreset": "mingw64-d3d11"
+        },
+        {
+            "name": "mingw64-dxgi",
+            "configurePreset": "mingw64-dxgi"
+        },
+        {
+            "name": "mingw64-version",
+            "configurePreset": "mingw64-version"
+        }
+    ]
+}

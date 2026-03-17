@@ -1,0 +1,16 @@
+EXPORTS
+    GetAddonDef
+    gw2addon_get_description
+    gw2addon_load
+    gw2addon_unload
+    GW2Load_GetAddonAPIVersion
+    GW2Load_OnLoad
+    GW2Load_OnClose
+    e0
+    e3
+    e5
+    e6
+    e7
+    e8
+    e9
+    e10
