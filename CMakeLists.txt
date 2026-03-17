@@ -53,6 +53,9 @@ target_include_directories(imgui_lib PUBLIC
     ${imgui_SOURCE_DIR}
     ${imgui_SOURCE_DIR}/backends
 )
+target_compile_definitions(imgui_lib PRIVATE
+    IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
+)
 
 # Main loader DLL — use fixed target name to avoid conflicts with link libraries
 set(TARGET_NAME "arcdps_loader")
