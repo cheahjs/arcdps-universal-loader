@@ -1,0 +1,41 @@
+EXPORTS
+    ; Loader entry points (Nexus / gw2-addon-loader / GW2Load)
+    GetAddonDef
+    gw2addon_get_description
+    gw2addon_load
+    gw2addon_unload
+    GW2Load_GetAddonAPIVersion
+    GW2Load_OnLoad
+    GW2Load_OnClose
+
+    ; arcdps API emulation
+    e0
+    e3
+    e5
+    e6
+    e7
+    e8
+    e9
+    e10
+
+    ; D3D11 proxy
+    D3D11CreateDevice
+    D3D11CreateDeviceAndSwapChain
+    D3D11On12CreateDevice
+
+    ; DXGI proxy
+    CreateDXGIFactory
+    CreateDXGIFactory1
+    CreateDXGIFactory2
+
+    ; version.dll proxy
+    GetFileVersionInfoA
+    GetFileVersionInfoW
+    GetFileVersionInfoSizeA
+    GetFileVersionInfoSizeW
+    VerQueryValueA
+    VerQueryValueW
+    GetFileVersionInfoExA
+    GetFileVersionInfoExW
+    GetFileVersionInfoSizeExA
+    GetFileVersionInfoSizeExW

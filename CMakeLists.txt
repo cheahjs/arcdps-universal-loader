@@ -4,24 +4,7 @@ project(arcdps_universal_loader VERSION 0.1.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Proxy mode selection
-set(PROXY_MODE "addon" CACHE STRING "Proxy mode: addon, d3d11, dxgi, version")
-set_property(CACHE PROXY_MODE PROPERTY STRINGS addon d3d11 dxgi version)
-
-# Output name based on proxy mode
-if(PROXY_MODE STREQUAL "d3d11")
-    set(OUTPUT_NAME "d3d11")
-    set(DEF_FILE "${CMAKE_SOURCE_DIR}/def/d3d11.def")
-elseif(PROXY_MODE STREQUAL "dxgi")
-    set(OUTPUT_NAME "dxgi")
-    set(DEF_FILE "${CMAKE_SOURCE_DIR}/def/dxgi.def")
-elseif(PROXY_MODE STREQUAL "version")
-    set(OUTPUT_NAME "version")
-    set(DEF_FILE "${CMAKE_SOURCE_DIR}/def/version_proxy.def")
-else()
-    set(OUTPUT_NAME "arcdps_universal_loader")
-    set(DEF_FILE "${CMAKE_SOURCE_DIR}/def/addon.def")
-endif()
+set(OUTPUT_NAME "arcdps_universal_loader")
 
 # Configure version resource
 configure_file(
@@ -57,7 +40,7 @@ target_compile_definitions(imgui_lib PRIVATE
     IMGUI_IMPL_WIN32_DISABLE_GAMEPAD
 )
 
-# Main loader DLL — use fixed target name to avoid conflicts with link libraries
+# Main loader DLL
 set(TARGET_NAME "arcdps_loader")
 
 add_library(${TARGET_NAME} SHARED
@@ -79,7 +62,7 @@ add_library(${TARGET_NAME} SHARED
     src/proxy/d3d11_proxy.cpp
     src/proxy/dxgi_proxy.cpp
     src/proxy/version_proxy.cpp
-    ${DEF_FILE}
+    ${CMAKE_SOURCE_DIR}/def/arcdps_universal_loader.def
     ${CMAKE_BINARY_DIR}/version.rc
 )
 
