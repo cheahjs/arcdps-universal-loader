@@ -1,5 +1,6 @@
 #include "wndproc_hook.h"
 #include "addons/addon_manager.h"
+#include "ui/settings_window.h"
 #include <imgui_impl_win32.h>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -10,6 +11,11 @@ static HWND s_hwnd = nullptr;
 static WNDPROC s_originalWndProc = nullptr;
 
 static LRESULT CALLBACK HookedWndProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+    // Check for settings window keybind (Alt+Shift+T) before anything else
+    if (SettingsWindow::HandleKeyInput(msg, wparam, lparam)) {
+        return 0;
+    }
+
     // Let ImGui handle input first
     if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam)) {
         return TRUE;

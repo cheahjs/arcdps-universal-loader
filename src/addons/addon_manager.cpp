@@ -2,6 +2,7 @@
 #include "addon_scanner.h"
 #include "addon_instance.h"
 #include "imgui/imgui_impl.h"
+#include <imgui.h>
 #include <vector>
 #include <mutex>
 
@@ -72,6 +73,37 @@ void DispatchOptionsEnd() {
     std::lock_guard<std::mutex> lock(s_mutex);
     for (auto& addon : s_addons) {
         addon.CallOptionsEnd();
+    }
+}
+
+void DispatchOptionsWindows(const char* windowName) {
+    std::lock_guard<std::mutex> lock(s_mutex);
+    for (auto& addon : s_addons) {
+        addon.CallOptionsWindows(windowName);
+    }
+}
+
+void DispatchExtensionTabs() {
+    std::lock_guard<std::mutex> lock(s_mutex);
+    for (auto& addon : s_addons) {
+        if (!addon.IsLoaded()) continue;
+        const char* name = addon.GetName();
+        if (ImGui::BeginTabItem(name)) {
+            addon.CallOptionsEnd();
+            ImGui::EndTabItem();
+        }
+    }
+}
+
+void DispatchAboutInfo() {
+    std::lock_guard<std::mutex> lock(s_mutex);
+    if (s_addons.empty()) {
+        ImGui::TextDisabled("No extensions loaded");
+        return;
+    }
+    for (auto& addon : s_addons) {
+        if (!addon.IsLoaded()) continue;
+        ImGui::BulletText("%s", addon.GetName());
     }
 }
 

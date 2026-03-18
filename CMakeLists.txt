@@ -59,6 +59,7 @@ add_library(${TARGET_NAME} SHARED
     src/entry/entry_gw2al.cpp
     src/entry/entry_gw2load.cpp
     src/entry/entry_proxy.cpp
+    src/ui/settings_window.cpp
     src/proxy/d3d11_proxy.cpp
     src/proxy/dxgi_proxy.cpp
     src/proxy/version_proxy.cpp

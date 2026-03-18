@@ -3,6 +3,7 @@
 #include "hook/wndproc_hook.h"
 #include "imgui/imgui_impl.h"
 #include "addons/addon_manager.h"
+#include "ui/settings_window.h"
 #include <chrono>
 
 namespace LoaderCore {
@@ -74,6 +75,7 @@ void OnPresent(IDXGISwapChain* swapchain) {
 
     // Running phase
     ImGuiImpl::NewFrame();
+    SettingsWindow::Render();
     AddonManager::DispatchPresent();
     ImGuiImpl::Render();
 }
