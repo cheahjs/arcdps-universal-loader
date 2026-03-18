@@ -78,5 +78,5 @@ struct AddonDefinition {
     const char* UpdateLink;
 };
 
-/* The export that Nexus looks for */
-extern "C" __declspec(dllexport) AddonDefinition* GetAddonDef();
+/* The export that Nexus looks for — exported via .def file */
+extern "C" AddonDefinition* GetAddonDef();

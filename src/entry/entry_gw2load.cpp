@@ -11,16 +11,16 @@ void OnPresent(void* swapchain) {
 
 } // namespace EntryGW2Load
 
-extern "C" __declspec(dllexport) uint32_t GW2Load_GetAddonAPIVersion() {
+extern "C" uint32_t GW2Load_GetAddonAPIVersion() {
     return GW2Load_CurrentAddonAPIVersion;
 }
 
-extern "C" __declspec(dllexport) void GW2Load_OnLoad(void* api) {
+extern "C" void GW2Load_OnLoad(void* api) {
     (void)api;
     LoaderCore::SetLoadMethod(LoadMethod::GW2Load);
     // GW2Load provides Present callbacks — we'll receive them via the callback system
 }
 
-extern "C" __declspec(dllexport) void GW2Load_OnClose() {
+extern "C" void GW2Load_OnClose() {
     LoaderCore::Shutdown();
 }

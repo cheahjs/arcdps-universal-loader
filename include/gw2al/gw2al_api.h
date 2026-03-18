@@ -49,9 +49,9 @@ inline gw2al_hashed_name gw2al_hash(gw2al_core_vtable* core, const wchar_t* name
     return core->hash_name(name);
 }
 
-/* Addon export signatures */
+/* Addon export signatures — exported via .def file */
 extern "C" {
-    __declspec(dllexport) gw2al_addon_dsc* gw2addon_get_description();
-    __declspec(dllexport) gw2al_api_ret gw2addon_load(gw2al_core_vtable* core);
-    __declspec(dllexport) gw2al_api_ret gw2addon_unload(gw2al_core_vtable* core);
+    gw2al_addon_dsc* gw2addon_get_description();
+    gw2al_api_ret gw2addon_load(gw2al_core_vtable* core);
+    gw2al_api_ret gw2addon_unload(gw2al_core_vtable* core);
 }

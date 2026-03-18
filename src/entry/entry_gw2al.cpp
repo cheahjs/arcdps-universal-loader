@@ -27,11 +27,11 @@ static gw2al_addon_dsc s_addonDesc = {
     &s_libImguiDep
 };
 
-extern "C" __declspec(dllexport) gw2al_addon_dsc* gw2addon_get_description() {
+extern "C" gw2al_addon_dsc* gw2addon_get_description() {
     return &s_addonDesc;
 }
 
-extern "C" __declspec(dllexport) gw2al_api_ret gw2addon_load(gw2al_core_vtable* core) {
+extern "C" gw2al_api_ret gw2addon_load(gw2al_core_vtable* core) {
     s_core = core;
     LoaderCore::SetLoadMethod(LoadMethod::GW2AL);
 
@@ -47,7 +47,7 @@ extern "C" __declspec(dllexport) gw2al_api_ret gw2addon_load(gw2al_core_vtable* 
     return GW2AL_OK;
 }
 
-extern "C" __declspec(dllexport) gw2al_api_ret gw2addon_unload(gw2al_core_vtable* core) {
+extern "C" gw2al_api_ret gw2addon_unload(gw2al_core_vtable* core) {
     gw2al_unsubscribe_imgui_draw(core, (void*)EntryGW2AL::OnImGuiDraw);
     LoaderCore::Shutdown();
     s_core = nullptr;

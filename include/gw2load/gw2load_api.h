@@ -20,9 +20,9 @@ typedef void (*GW2Load_PresentCallback_t)(void* swapchain);
 typedef void (*GW2Load_ResizeCallback_t)(void* swapchain, uint32_t width, uint32_t height);
 typedef void (*GW2Load_WndProcCallback_t)(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam, bool* handled);
 
-/* Export signatures */
+/* Export signatures — exported via .def file */
 extern "C" {
-    __declspec(dllexport) uint32_t GW2Load_GetAddonAPIVersion();
-    __declspec(dllexport) void GW2Load_OnLoad(void* api);
-    __declspec(dllexport) void GW2Load_OnClose();
+    uint32_t GW2Load_GetAddonAPIVersion();
+    void GW2Load_OnLoad(void* api);
+    void GW2Load_OnClose();
 }

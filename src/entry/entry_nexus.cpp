@@ -53,6 +53,6 @@ static AddonDefinition s_addonDef = {
     .UpdateLink = nullptr,
 };
 
-extern "C" __declspec(dllexport) AddonDefinition* GetAddonDef() {
+extern "C" AddonDefinition* GetAddonDef() {
     return &s_addonDef;
 }
